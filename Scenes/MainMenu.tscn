@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctv1134qygwd7"]
+
+[ext_resource type="Script" uid="uid://cvrotlrc14hli" path="res://Scripts/MainMenu.cs" id="1_tt5f1"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_tt5f1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 217.0
+offset_bottom = 48.0
+
+[node name="Button" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+text = "Celular Automata"
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Button" to="." method="_on_cellular_automata_button_pressed"]

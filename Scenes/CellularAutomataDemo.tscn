@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bt56iibkeye75"]
+
+[node name="CellularAutomataDemo" type="Node2D"]

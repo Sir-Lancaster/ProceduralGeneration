@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="ProceduralGenerationDemos"
-config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+run/main_scene="uid://hfibplo1x4h3"
+config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+config/icon="res://Assets/icon.svg"
+
+[autoload]
+
+SceneManager="*res://Scripts/SceneManager.cs"
 
 [dotnet]
 

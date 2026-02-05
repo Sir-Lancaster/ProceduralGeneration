@@ -1,3 +1,33 @@
-[gd_scene format=3 uid="uid://bt56iibkeye75"]
+[gd_scene load_steps=4 format=3 uid="uid://bt56iibkeye75"]
+
+[ext_resource type="Script" uid="uid://dkdfkf8dgc7e4" path="res://Scripts/CellularAutomataDemo.cs" id="1_rs2we"]
+[ext_resource type="Script" uid="uid://d2mtxgxobgn0g" path="res://Scripts/WorldRenderer.cs" id="2_02t0i"]
+[ext_resource type="Script" uid="uid://cl8fij0dxvj0j" path="res://Scripts/CameraController.cs" id="3_02t0i"]
 
 [node name="CellularAutomataDemo" type="Node2D"]
+script = ExtResource("1_rs2we")
+
+[node name="WorldRenderer" type="Node2D" parent="."]
+script = ExtResource("2_02t0i")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_02t0i")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UIPanel" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 100.0
+
+[node name="GenerateButton" type="Button" parent="CanvasLayer/UIPanel"]
+layout_mode = 2
+text = "Generate"
+
+[node name="BackToMenuButton" type="Button" parent="CanvasLayer/UIPanel"]
+layout_mode = 2
+text = "Back To Menu"
+
+[connection signal="pressed" from="CanvasLayer/UIPanel/GenerateButton" to="." method="_on_generate_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UIPanel/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]

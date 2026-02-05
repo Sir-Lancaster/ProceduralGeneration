@@ -63,7 +63,7 @@ public static class PerlinNoise
         return result;
     }
 
-    private static int[] GeneratePermutationTable(int seed)
+    public static int[] GeneratePermutationTable(int seed)
     {
         RandomNumberGenerator rng = new RandomNumberGenerator
         {

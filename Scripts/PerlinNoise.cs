@@ -28,10 +28,10 @@ public static class PerlinNoise
         float dy = y - y0;
 
         // Look up gradients using permutation table
-        int p00 = permTable[permTable[x0] + y0];
-        int p01 = permTable[permTable[x0] + y1];
-        int p10 = permTable[permTable[x1] + y0];
-        int p11 = permTable[permTable[x1] + y1];
+        int p00 = permTable[(permTable[x0 & 255] + y0) & 255];
+        int p01 = permTable[(permTable[x0 & 255] + y1) & 255];
+        int p10 = permTable[(permTable[x1 & 255] + y0) & 255];
+        int p11 = permTable[(permTable[x1 & 255] + y1) & 255];
 
         // Record gradient indexes.
         int gradientIndex00 = p00 % Gradients.Length;
@@ -96,6 +96,36 @@ public static class PerlinNoise
         }
         
         return PermTable;
+    }
+
+    public static float FractalNoise2D(float x, float y, int[] permTable, int octaves, float persistence, float lacunarity, float scale)
+    {
+        float total = 0f;
+        float amplitude = 1f;
+        float frequency = scale;
+        float maxValue = 0f;  // For normalization
+
+        for (int i = 0; i < octaves; i++)
+        {
+            // Sample Perlin noise at current frequency
+            float sampleX = x * frequency;
+            float sampleY = y * frequency;
+            
+            float noiseValue = PerlinNoise2D(sampleX, sampleY, permTable);
+            
+            // Add this octave's contribution
+            total += noiseValue * amplitude;
+            
+            // Track max possible value for normalization
+            maxValue += amplitude;
+            
+            // Prepare for next octave
+            amplitude *= persistence;  // Reduce amplitude
+            frequency *= lacunarity;   // Increase frequency
+        }
+
+        // Normalize to [-1, 1] range
+        return total / maxValue;
     }
 
     // Helper functions.

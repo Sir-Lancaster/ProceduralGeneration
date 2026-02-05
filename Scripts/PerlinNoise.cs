@@ -1,6 +1,3 @@
-using System.ComponentModel;
-using System.Data.SqlTypes;
-using System.IO;
 using Godot;
 
 public static class PerlinNoise

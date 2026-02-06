@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctv1134qygwd7"]
+[gd_scene load_steps=3 format=3 uid="uid://ctv1134qygwd7"]
 
 [ext_resource type="Script" uid="uid://cvrotlrc14hli" path="res://Scripts/MainMenu.cs" id="1_tt5f1"]
+[ext_resource type="FontFile" uid="uid://bjtsw8wh7d744" path="res://Assets/OldeEnglish.ttf" id="2_853f1"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -21,7 +22,16 @@ offset_right = 108.5
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
 alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenuNavContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("2_853f1")
+theme_override_font_sizes/font_size = 40
+text = "Procedural Generation"
+horizontal_alignment = 1
 
 [node name="CellularAutomataNav" type="Button" parent="CanvasLayer/MainMenuNavContainer"]
 layout_mode = 2

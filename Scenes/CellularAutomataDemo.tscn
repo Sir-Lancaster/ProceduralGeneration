@@ -16,8 +16,8 @@ script = ExtResource("3_02t0i")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UIPanel" type="VBoxContainer" parent="CanvasLayer"]
-offset_right = 163.0
-offset_bottom = 254.0
+offset_right = 192.0
+offset_bottom = 248.0
 
 [node name="FillProbLabel" type="Label" parent="CanvasLayer/UIPanel"]
 layout_mode = 2

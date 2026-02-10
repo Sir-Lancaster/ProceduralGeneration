@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://d0tpsr2kps2n6"]
+
+[node name="UIPanel" type="VBoxContainer"]
+offset_right = 192.0
+offset_bottom = 248.0
+
+[node name="WidthLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Chunk Width"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WidthSlider" type="HSlider" parent="."]
+layout_mode = 2
+min_value = 100.0
+max_value = 1000.0
+value = 200.0
+
+[node name="HeightLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Chunk Height"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeightSlider" type="HSlider" parent="."]
+layout_mode = 2
+min_value = 100.0
+max_value = 1000.0
+value = 200.0
+
+[node name="FillProbLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Initial Density"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FillProbSlider" type="HSlider" parent="."]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="SmoothIterLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Num Steps"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SmoothIterSlider" type="HSlider" parent="."]
+layout_mode = 2
+max_value = 20.0
+value = 5.0
+
+[node name="BirthLimLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Birth Limit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BirthLimSlider" type="HSlider" parent="."]
+layout_mode = 2
+max_value = 10.0
+value = 4.0
+
+[node name="DeathLimLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Death Limit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeathLimSlider" type="HSlider" parent="."]
+layout_mode = 2
+max_value = 10.0
+value = 3.0
+
+[node name="SeedLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Seed (0 for random)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SeedInput" type="LineEdit" parent="."]
+layout_mode = 2
+
+[node name="GenerateButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Generate"
+
+[node name="BackToMenuButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back To Menu"

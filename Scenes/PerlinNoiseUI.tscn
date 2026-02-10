@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://b0x0qw5jhy14s"]
+
+[node name="UIPanel" type="VBoxContainer"]
+offset_right = 117.0
+offset_bottom = 66.0
+alignment = 1
+
+[node name="WidthLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Chunk Width"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WidthSlider" type="HSlider" parent="."]
+layout_mode = 2
+min_value = 100.0
+max_value = 1000.0
+value = 200.0
+
+[node name="HeightLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Chunk Height"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeightSlider" type="HSlider" parent="."]
+layout_mode = 2
+min_value = 100.0
+max_value = 1000.0
+value = 200.0
+
+[node name="UseFbmCheckbox" type="CheckBox" parent="."]
+layout_mode = 2
+button_pressed = true
+text = "Use FBM?"
+
+[node name="OctavesLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Octaves"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OctavesSlider" type="HSlider" parent="."]
+layout_mode = 2
+min_value = 1.0
+max_value = 8.0
+value = 6.0
+
+[node name="SeedLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Seed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SeedInput" type="LineEdit" parent="."]
+layout_mode = 2
+
+[node name="DeepWaterLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Deep Water Threshold"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeepWaterSlider" type="HSlider" parent="."]
+layout_mode = 2
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+value = -0.5
+
+[node name="ShallowWaterLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Shallow Water Threshold"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShallowWaterSlider" type="HSlider" parent="."]
+layout_mode = 2
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+value = -0.19999999999999996
+
+[node name="BeachLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Beach Threshold"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BeachSlider" type="HSlider" parent="."]
+layout_mode = 2
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+
+[node name="GrassLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Grass Threshold"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GrassSlider" type="HSlider" parent="."]
+layout_mode = 2
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="MountainLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Mountain Threshold"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MountainSlider" type="HSlider" parent="."]
+layout_mode = 2
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+value = 0.8
+
+[node name="GenerateButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Generate"
+
+[node name="BackToMenuButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back To Menu"

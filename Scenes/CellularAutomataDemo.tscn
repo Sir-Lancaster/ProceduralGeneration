@@ -1,82 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bt56iibkeye75"]
+[gd_scene load_steps=5 format=3 uid="uid://bt56iibkeye75"]
 
 [ext_resource type="Script" uid="uid://dkdfkf8dgc7e4" path="res://Scripts/CellularAutomataDemo.cs" id="1_rs2we"]
-[ext_resource type="Script" uid="uid://d2mtxgxobgn0g" path="res://Scripts/WorldRenderer.cs" id="2_02t0i"]
+[ext_resource type="Script" uid="uid://caonwvkhqkwf0" path="res://Scripts/AutomataWorldRenderer.cs" id="2_fl6lm"]
 [ext_resource type="Script" uid="uid://cl8fij0dxvj0j" path="res://Scripts/CameraController.cs" id="3_02t0i"]
+[ext_resource type="PackedScene" uid="uid://d0tpsr2kps2n6" path="res://Scenes/CellularAutomataUI.tscn" id="4_fl6lm"]
 
 [node name="CellularAutomataDemo" type="Node2D"]
 script = ExtResource("1_rs2we")
 
-[node name="WorldRenderer" type="Node2D" parent="."]
-script = ExtResource("2_02t0i")
+[node name="AutomataWorldRenderer" type="Node2D" parent="."]
+script = ExtResource("2_fl6lm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_02t0i")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="UIPanel" type="VBoxContainer" parent="CanvasLayer"]
-offset_right = 192.0
-offset_bottom = 248.0
-
-[node name="FillProbLabel" type="Label" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-text = "Fill Probability"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="FillProbSlider" type="HSlider" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-value = 0.45
-
-[node name="SmoothIterLabel" type="Label" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-text = "Smoothing Iterations"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SmoothIterSlider" type="HSlider" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-max_value = 20.0
-value = 5.0
-
-[node name="BirthLimLabel" type="Label" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-text = "Birth Limit"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BirthLimSlider" type="HSlider" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-max_value = 10.0
-value = 4.0
-
-[node name="DeathLimLabel" type="Label" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-text = "Death Limit"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DeathLimSlider" type="HSlider" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-max_value = 10.0
-value = 3.0
-
-[node name="GenerateButton" type="Button" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Generate"
-
-[node name="BackToMenuButton" type="Button" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Back To Menu"
-
-[connection signal="value_changed" from="CanvasLayer/UIPanel/FillProbSlider" to="." method="_on_fill_prob_slider_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/UIPanel/SmoothIterSlider" to="." method="_on_smooth_iter_slider_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/UIPanel/BirthLimSlider" to="." method="_on_birth_lim_slider_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/UIPanel/DeathLimSlider" to="." method="_on_death_lim_slider_value_changed"]
-[connection signal="pressed" from="CanvasLayer/UIPanel/GenerateButton" to="." method="_on_generate_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/UIPanel/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
+[node name="UIPanel" parent="CanvasLayer" instance=ExtResource("4_fl6lm")]

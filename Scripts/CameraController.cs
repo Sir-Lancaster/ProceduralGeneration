@@ -5,7 +5,7 @@ public partial class CameraController : Camera2D
     [Export] 
     public float ZoomSpeed = 0.1f;
     [Export] 
-    public float MinZoom = 0.5f;
+    public float MinZoom = 0.1f;
     [Export] 
     public float MaxZoom = 3.0f;
 

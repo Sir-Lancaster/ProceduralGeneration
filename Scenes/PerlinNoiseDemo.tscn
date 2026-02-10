@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c55quq6j3iyhy"]
+[gd_scene load_steps=5 format=3 uid="uid://c55quq6j3iyhy"]
 
 [ext_resource type="Script" uid="uid://cungry4h1u5lx" path="res://Scripts/PerlinNoiseDemo.cs" id="1_dlr8d"]
 [ext_resource type="Script" uid="uid://cm4ckk0stxwtv" path="res://Scripts/PerlinWorldRenderer.cs" id="2_j31yp"]
 [ext_resource type="Script" uid="uid://cl8fij0dxvj0j" path="res://Scripts/CameraController.cs" id="3_03cq2"]
+[ext_resource type="PackedScene" uid="uid://b0x0qw5jhy14s" path="res://Scenes/PerlinNoiseUI.tscn" id="4_j31yp"]
 
 [node name="PerlinNoiseDemo" type="Node2D"]
 script = ExtResource("1_dlr8d")
@@ -15,87 +16,4 @@ script = ExtResource("3_03cq2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="UIPanel" type="VBoxContainer" parent="CanvasLayer"]
-offset_right = 117.0
-offset_bottom = 66.0
-alignment = 1
-
-[node name="OctavesLabel" type="Label" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-text = "Octaves"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="OctavesSlider" type="HSlider" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-min_value = 1.0
-max_value = 8.0
-value = 6.0
-
-[node name="PersistenceLabel" type="Label" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-text = "Persistence"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PersistenceSlider" type="HSlider" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-min_value = 0.1
-max_value = 1.0
-step = 0.01
-value = 0.5
-
-[node name="LacunarityLabel" type="Label" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-text = "Lacunarity"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LacunaritySlider" type="HSlider" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-min_value = 1.0
-max_value = 4.0
-step = 0.1
-value = 2.0
-
-[node name="ScaleLabel" type="Label" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-text = "Scale"
-horizontal_alignment = 1
-
-[node name="ScaleSlider" type="HSlider" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-min_value = 0.01
-max_value = 0.2
-step = 0.01
-value = 0.05
-
-[node name="SeedLabel" type="Label" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-text = "Seed"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SeedSlider" type="HSlider" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-min_value = -1000.0
-max_value = 1000.0
-value = 42.0
-
-[node name="GenerateButton" type="Button" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Generate"
-
-[node name="BackToMenuButton" type="Button" parent="CanvasLayer/UIPanel"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Back To Menu"
-
-[connection signal="value_changed" from="CanvasLayer/UIPanel/OctavesSlider" to="." method="_on_octaves_slider_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/UIPanel/PersistenceSlider" to="." method="_on_persistence_slider_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/UIPanel/LacunaritySlider" to="." method="_on_lacunarity_slider_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/UIPanel/ScaleSlider" to="." method="_on_scale_slider_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/UIPanel/SeedSlider" to="." method="_on_seed_slider_value_changed"]
-[connection signal="pressed" from="CanvasLayer/UIPanel/GenerateButton" to="." method="_on_generate_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/UIPanel/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
+[node name="UIPanel" parent="CanvasLayer" instance=ExtResource("4_j31yp")]

@@ -125,7 +125,7 @@ public static class PerlinNoise
         }
 
         // Normalize to [-1, 1] range
-        return total / maxValue;
+        return total / maxValue / 0.707f / 0.5f;
     }
 
     // Helper functions.

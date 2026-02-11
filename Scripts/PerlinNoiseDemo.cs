@@ -15,9 +15,9 @@ public partial class PerlinNoiseDemo : Node2D
     private int _width = 200;
     private int _height = 200;
     private int _octaves = 4;
-    private float _persistence = 0.5f;
+    private float _persistence = 0.9f;
     private float _lacunarity = 2.0f;
-    private float _scale = 0.05f;
+    private float _scale = 0.01f;
     private int _seed = 0;
     private bool _useFbm = true;
 

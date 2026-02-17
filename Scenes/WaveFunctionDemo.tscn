@@ -1,3 +1,15 @@
-[gd_scene format=3 uid="uid://k16c28d6cqw6"]
+[gd_scene load_steps=3 format=3 uid="uid://k16c28d6cqw6"]
+
+[ext_resource type="PackedScene" uid="uid://caq3eptulrjvx" path="res://Scenes/WaveFunctionUI.tscn" id="1_6sple"]
+[ext_resource type="Script" uid="uid://cl8fij0dxvj0j" path="res://Scripts/CameraController.cs" id="1_8ncoe"]
 
 [node name="WaveFunctionDemo" type="Node2D"]
+
+[node name="WaveWorldRenderer" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("1_8ncoe")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UIPanel" parent="CanvasLayer" instance=ExtResource("1_6sple")]

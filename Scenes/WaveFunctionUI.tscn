@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://caq3eptulrjvx"]
+
+[node name="UIPanel" type="VBoxContainer"]
+
+[node name="Width" type="Label" parent="."]
+layout_mode = 2
+text = "Chunck Width"
+horizontal_alignment = 1
+
+[node name="WidthSlider" type="HSlider" parent="."]
+layout_mode = 2
+
+[node name="Height" type="Label" parent="."]
+layout_mode = 2
+text = "Chunk Height"
+horizontal_alignment = 1
+
+[node name="HeightSlider" type="HSlider" parent="."]
+layout_mode = 2
+
+[node name="WeightSet" type="Label" parent="."]
+layout_mode = 2
+text = "Weight Set"
+horizontal_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 2
+alignment = 1
+selected = 0
+item_count = 1
+popup/item_0/text = "All Tiles"
+popup/item_0/id = 0
+
+[node name="Seed" type="Label" parent="."]
+layout_mode = 2
+text = "Seed (0 for Random)"
+horizontal_alignment = 1
+
+[node name="TextEdit" type="LineEdit" parent="."]
+layout_mode = 2
+placeholder_text = "0"
+
+[node name="GenerateButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Generate"
+
+[node name="BackToMenuButton" type="Button" parent="."]
+layout_mode = 2
+text = "Back To Menu"

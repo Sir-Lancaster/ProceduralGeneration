@@ -41,5 +41,10 @@ text = "Celular Automata"
 layout_mode = 2
 text = "Perlin Noise"
 
+[node name="WaveFunctionNav" type="Button" parent="CanvasLayer/MainMenuNavContainer"]
+layout_mode = 2
+text = "Wave Function Collapse"
+
 [connection signal="pressed" from="CanvasLayer/MainMenuNavContainer/CellularAutomataNav" to="." method="_on_cellular_automata_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenuNavContainer/PerlinNoiseNav" to="." method="_on_perlin_noise_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenuNavContainer/WaveFunctionNav" to="." method="_on_wave_function_nav_pressed"]

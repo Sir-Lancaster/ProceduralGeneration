@@ -22,4 +22,9 @@ public partial class MainMenu : Control
 	{
 		GetTree().Root.GetNode<SceneManager>("SceneManager").GoToPerlinNoiseDemo();
 	}
+	
+	private void _on_wave_function_nav_pressed()
+	{
+		GetTree().Root.GetNode<SceneManager>("SceneManager").GoToWaveFunctionDemo();
+	}
 }

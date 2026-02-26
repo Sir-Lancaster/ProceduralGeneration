@@ -2,7 +2,9 @@ using Godot;
 
 public class BinarySpace
 {
-    // variables tbd
+    private int _maxDepth; 
+    private int _minSize; 
+    private BSPNode _root;
 
     // Builds and returns the tree
     public static BSPNode BuildBSP(Rect2I region, int depth)
@@ -18,6 +20,11 @@ public class BinarySpace
 
     // Walks the tree and stores corridors on internal nodes, no return needed
     public static void ConnectRegions(BSPNode node)
+    {
+        return;
+    }
+
+    public void Generate(int MaxDepth, int MinSize, int width, int height)
     {
         return;
     }

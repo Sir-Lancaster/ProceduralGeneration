@@ -1,3 +1,39 @@
 [gd_scene format=3 uid="uid://d2xbxqhsp5ibr"]
 
-[node name="BinaryUi" type="Node2D"]
+[node name="UIPanel" type="VBoxContainer"]
+
+[node name="HeightLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Height"
+horizontal_alignment = 1
+
+[node name="HeightSlider" type="HSlider" parent="."]
+layout_mode = 2
+
+[node name="WidthLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Width"
+horizontal_alignment = 1
+
+[node name="WidthSlider" type="HSlider" parent="."]
+layout_mode = 2
+
+[node name="SeedLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Seed"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+placeholder_text = "0"
+
+[node name="DepthHLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Label"
+horizontal_alignment = 1
+
+[node name="Depthmin" type="Label" parent="."]
+layout_mode = 2
+
+[node name="SplitChance" type="Label" parent="."]
+layout_mode = 2

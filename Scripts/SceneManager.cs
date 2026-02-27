@@ -6,14 +6,16 @@ public partial class SceneManager : Node
     private PackedScene _cellularAutomataScene;
     private PackedScene _perlinNoiseScene;
     private PackedScene _waveCollapseScene;
+    private PackedScene _bspScene;
 
     public override void _Ready()
     {
         // Preload scenes
         _mainMenuScene = GD.Load<PackedScene>("res://Scenes/MainMenu.tscn");
-        _cellularAutomataScene = GD.Load<PackedScene>("res://Scenes/CellularAutomataDemo.tscn");
-        _perlinNoiseScene = GD.Load<PackedScene>("res://Scenes/PerlinNoiseDemo.tscn");
-        _waveCollapseScene = GD.Load<PackedScene>("res://Scenes/WaveFunctionDemo.tscn");
+        _cellularAutomataScene = GD.Load<PackedScene>("res://Scenes/CellularAutomata/CellularAutomataDemo.tscn");
+        _perlinNoiseScene = GD.Load<PackedScene>("res://Scenes/PerlinNoise/PerlinNoiseDemo.tscn");
+        _waveCollapseScene = GD.Load<PackedScene>("res://Scenes/WaveFunctionCollapse/WaveFunctionDemo.tscn");
+        _bspScene = GD.Load<PackedScene>("res://Scenes/BinarySpacePartitioning/BSPDemo.tscn");
     }
 
     public void GoToMainMenu()
@@ -34,5 +36,10 @@ public partial class SceneManager : Node
     public void GoToWaveFunctionDemo()
     {
         GetTree().ChangeSceneToPacked(_waveCollapseScene);
+    }
+
+    public void GoToBSPDemo()
+    {
+        GetTree().ChangeSceneToPacked(_bspScene);
     }
 }

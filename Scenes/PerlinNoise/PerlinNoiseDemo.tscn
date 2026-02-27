@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://c55quq6j3iyhy"]
 
-[ext_resource type="Script" uid="uid://cungry4h1u5lx" path="res://Scripts/PerlinNoiseDemo.cs" id="1_dlr8d"]
-[ext_resource type="Script" uid="uid://cm4ckk0stxwtv" path="res://Scripts/PerlinWorldRenderer.cs" id="2_j31yp"]
+[ext_resource type="Script" uid="uid://cungry4h1u5lx" path="res://Scripts/PerlinNoise/PerlinNoiseDemo.cs" id="1_dlr8d"]
+[ext_resource type="Script" uid="uid://cm4ckk0stxwtv" path="res://Scripts/PerlinNoise/PerlinWorldRenderer.cs" id="2_j31yp"]
 [ext_resource type="Script" uid="uid://cl8fij0dxvj0j" path="res://Scripts/CameraController.cs" id="3_03cq2"]
-[ext_resource type="PackedScene" uid="uid://b0x0qw5jhy14s" path="res://Scenes/PerlinNoiseUI.tscn" id="4_j31yp"]
+[ext_resource type="PackedScene" uid="uid://b0x0qw5jhy14s" path="res://Scenes/PerlinNoise/PerlinNoiseUI.tscn" id="4_j31yp"]
 
 [node name="PerlinNoiseDemo" type="Node2D"]
 script = ExtResource("1_dlr8d")

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Globalization;
 
 public class BinarySpace
 {
@@ -84,16 +85,55 @@ public class BinarySpace
         return node;
     }
 
-    // Walks the tree and stores rooms on leaves
+    // Recursively walks the tree and stores rooms on leaves.
     private void PlaceRooms(BSPNode node)
     {
-        
+        int margin = 2;
+
+        if (node.IsLeaf)
+        {
+            // Randomly generate a size and position for the x within the margin of the region.
+            int roomWidth = _random.Next(_minSize, node.Region.Size.X - margin * 2);
+            int roomHeight = _random.Next(_minSize, node.Region.Size.Y - margin * 2);
+            int roomX = _random.Next(
+                node.Region.Position.X + margin,
+                node.Region.Position.X + node.Region.Size.X - roomWidth - margin
+            );
+            int roomY = _random.Next(
+                node.Region.Position.Y + margin,
+                node.Region.Position.Y + node.Region.Size.Y - roomHeight - margin
+            );
+            
+            // Create the new room.
+            node.Room = new Rect2I(roomX, roomY, roomWidth, roomHeight);
+        }
+
+        // If the node is not a leaf, recursively check the left and right children.
+        else
+        {
+            PlaceRooms(node.Left);
+            PlaceRooms(node.Right);
+        }
     }
 
     // Walks the tree and stores corridors on internal nodes
     private void ConnectRegions(BSPNode node)
     {
-        
+        if (node.IsLeaf)
+        {
+            return;
+        }
+
+        else
+        {
+            // Recurse down the tree.
+            ConnectRegions(node.Left);
+            ConnectRegions(node.Right);
+
+            // Store the corridor on the parent node.
+            node.CorridorStart = node.Left.Region.GetCenter();
+            node.CorridorEnd = node.Right.Region.GetCenter();
+        }
     }
 
     public void Generate(int maxDepth, int minSize, int width, int height, int seed, float splitChance)

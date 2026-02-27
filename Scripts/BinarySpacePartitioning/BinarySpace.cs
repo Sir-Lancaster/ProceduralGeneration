@@ -1,11 +1,10 @@
 using Godot;
 using System;
-using System.Globalization;
 
 public class BinarySpace
 {
     private int _maxDepth; 
-    private int _minSize; 
+    private int _minDepth; 
     private int _seed; 
     private Random _random;
     private float _splitChance;
@@ -19,13 +18,13 @@ public class BinarySpace
         BSPNode node = new BSPNode(region);
 
         // Stopping conditions.
-        if (depth >= _maxDepth || region.Size.X < _minSize * 2 || region.Size.Y < _minSize * 2)
+        if (depth >= _maxDepth || region.Size.X < _minDepth * 2 || region.Size.Y < _minDepth * 2)
         {
             return node;
         }
 
         // Check split chance for random early exit condition.
-        if (_random.NextDouble() > _splitChance)
+        if (depth >= _minDepth && _random.NextDouble() > _splitChance)
         {
             return node;
         }
@@ -37,8 +36,8 @@ public class BinarySpace
         if (splitHorizontally)
         {
             int splitY = _random.Next(
-                region.Position.Y + _minSize,
-                region.Position.Y + region.Size.Y - _minSize
+                region.Position.Y + _minDepth,
+                region.Position.Y + region.Size.Y - _minDepth
             );
             
             Rect2I topRegion = new Rect2I(
@@ -61,8 +60,8 @@ public class BinarySpace
         else
         {
             int splitX = _random.Next(
-                region.Position.X + _minSize,
-                region.Position.X + region.Size.X - _minSize
+                region.Position.X + _minDepth,
+                region.Position.X + region.Size.X - _minDepth
             );
 
             Rect2I leftRegion = new Rect2I(
@@ -92,9 +91,15 @@ public class BinarySpace
 
         if (node.IsLeaf)
         {
-            // Randomly generate a size and position for the x within the margin of the region.
-            int roomWidth = _random.Next(_minSize, node.Region.Size.X - margin * 2);
-            int roomHeight = _random.Next(_minSize, node.Region.Size.Y - margin * 2);
+            int maxRoomWidth = (int)(node.Region.Size.X * 0.6f) - margin * 2;
+            int maxRoomHeight = (int)(node.Region.Size.Y * 0.6f) - margin * 2;
+
+            // Skip if the max is smaller than or equal to the minimum size.
+            if (maxRoomWidth <= _minDepth || maxRoomHeight <= _minDepth)
+                return;
+
+            int roomWidth = _random.Next(_minDepth, maxRoomWidth);
+            int roomHeight = _random.Next(_minDepth, maxRoomHeight);
             int roomX = _random.Next(
                 node.Region.Position.X + margin,
                 node.Region.Position.X + node.Region.Size.X - roomWidth - margin
@@ -103,8 +108,6 @@ public class BinarySpace
                 node.Region.Position.Y + margin,
                 node.Region.Position.Y + node.Region.Size.Y - roomHeight - margin
             );
-            
-            // Create the new room.
             node.Room = new Rect2I(roomX, roomY, roomWidth, roomHeight);
         }
 
@@ -136,11 +139,11 @@ public class BinarySpace
         }
     }
 
-    public void Generate(int maxDepth, int minSize, int width, int height, int seed, float splitChance)
+    public void Generate(int maxDepth, int minDepth, int width, int height, int seed, float splitChance)
     {
         // Initialize parameters.
         _maxDepth = maxDepth;
-        _minSize = minSize;
+        _minDepth = minDepth;
         _seed = seed;
         _splitChance = splitChance;
         _random = new Random(_seed);

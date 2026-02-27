@@ -37,6 +37,9 @@ public partial class BSPWorldRenderer : BaseWorldRenderer
 
         }
 
+        // Draw region outline for debugging
+        DrawRect(TileToPixel(node.Region), Colors.DimGray, false); // false = outline only
+
         // Recurse into children, Gaurd against leaves.
         if (!node.IsLeaf)
         {

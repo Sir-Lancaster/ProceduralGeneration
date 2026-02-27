@@ -16,4 +16,9 @@ public partial class MainMenu : Control
 	{
 		GetTree().Root.GetNode<SceneManager>("SceneManager").GoToWaveFunctionDemo();
 	}
+	
+	private void _on_bsp_nav_pressed()
+	{
+		GetTree().Root.GetNode<SceneManager>("SceneManager").GoToBSPDemo();
+	}
 }

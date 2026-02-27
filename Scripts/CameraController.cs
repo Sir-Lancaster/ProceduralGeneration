@@ -16,7 +16,7 @@ public partial class CameraController : Camera2D
     {
         if (@event is InputEventMouseButton mouseButton)
         {
-            if (mouseButton.ButtonIndex == MouseButton.Middle)
+            if (mouseButton.ButtonIndex == MouseButton.Middle || mouseButton.ButtonIndex == MouseButton.Left)
             {
                 if (mouseButton.Pressed)
                 {

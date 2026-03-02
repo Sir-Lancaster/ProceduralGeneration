@@ -94,12 +94,9 @@ public class BinarySpace
             int maxRoomWidth = (int)(node.Region.Size.X * 0.6f) - margin * 2;
             int maxRoomHeight = (int)(node.Region.Size.Y * 0.6f) - margin * 2;
 
-            // Skip if the max is smaller than or equal to the minimum size.
-            if (maxRoomWidth <= _minDepth || maxRoomHeight <= _minDepth)
-                return;
-
-            int roomWidth = _random.Next(_minDepth, maxRoomWidth);
-            int roomHeight = _random.Next(_minDepth, maxRoomHeight);
+            // Small random range so rooms are consistently close to region size
+            int roomWidth = _random.Next(maxRoomWidth - 2, maxRoomWidth);
+            int roomHeight = _random.Next(maxRoomHeight - 2, maxRoomHeight);
             int roomX = _random.Next(
                 node.Region.Position.X + margin,
                 node.Region.Position.X + node.Region.Size.X - roomWidth - margin

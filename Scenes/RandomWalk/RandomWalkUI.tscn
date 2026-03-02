@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://djvvjw0cvtiuy"]
 
 [node name="RandomWalkUi" type="VBoxContainer"]
-offset_right = 211.0
-offset_bottom = 247.0
+offset_right = 329.0
+offset_bottom = 400.0
 
 [node name="MinStepsLabel" type="Label" parent="."]
 layout_mode = 2
@@ -45,17 +45,27 @@ horizontal_alignment = 1
 layout_mode = 2
 button_pressed = true
 
-[node name="BranchGrouping" type="HSplitContainer" parent="."]
+[node name="BranchEnableGroup" type="HSplitContainer" parent="."]
 layout_mode = 2
 
-[node name="BranchesLabel" type="Label" parent="BranchGrouping"]
+[node name="BranchesLabel" type="Label" parent="BranchEnableGroup"]
 layout_mode = 2
 text = "Branches"
 horizontal_alignment = 1
 
-[node name="BranchCheckButton" type="CheckButton" parent="BranchGrouping"]
+[node name="BranchCheckButton" type="CheckButton" parent="BranchEnableGroup"]
 layout_mode = 2
 button_pressed = true
+
+[node name="BranchConnectGroup" type="HSplitContainer" parent="."]
+layout_mode = 2
+
+[node name="BranchConnectLabel" type="Label" parent="BranchConnectGroup"]
+layout_mode = 2
+text = "Allow Branches To Connect"
+
+[node name="BranchConnectCheckButton" type="CheckButton" parent="BranchConnectGroup"]
+layout_mode = 2
 
 [node name="BranchChanceLabel" type="Label" parent="."]
 layout_mode = 2

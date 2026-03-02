@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cgurdy58xwl60"]
+
+[node name="RandomWalkDemo" type="Node2D"]

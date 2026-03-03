@@ -6,8 +6,8 @@ using Godot;
 public partial class RandomWalk
 {
 	// Constants.
-	private const int ROOM_SIZE = 8;
-	private const int HALLWAY_WIDTH = 2;
+	public const int ROOM_SIZE = 8;
+	public const int HALLWAY_WIDTH = 2;
 
 	// Private variables. Ordered: classes, Lists, int, float, bool.
 	private Random _random;

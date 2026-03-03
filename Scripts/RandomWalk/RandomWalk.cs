@@ -25,20 +25,22 @@ public partial class RandomWalk
 	public List<RWRoom> Rooms => _rooms;
 
 	// The algorithm.
-	private bool Walk(RWRoom currentRoom, int stepCount, bool isBranch = false)
+	private bool Walk(RWRoom currentRoom, int stepCount, RWRoom cameFrom = null, bool isBranch = false)
 	{
-		List<Vector2I> validDirections = GetValidDirections(currentRoom, isBranch);
+		List<Vector2I> validDirections = GetValidDirections(currentRoom, cameFrom, isBranch);
+		GD.Print($"Step {stepCount}, room {currentRoom.Position}, validDirs: {validDirections.Count}");
+		
 		if (stepCount >= _minSteps && (stepCount >= _maxSteps || validDirections.Count == 0))
 		{
+			GD.Print("Returning true - stopping condition met");
 			return true;
 		}
 		
-		// Early exit step chance.
-		if (stepCount >= _minSteps && _random.NextDouble() < _stepChance) return true;
+		if (stepCount >= _minSteps && _random.NextDouble() > _stepChance) return true;
 
-		// Dead end before minsteps.
 		if (validDirections.Count == 0)
 		{
+			GD.Print("Returning false - dead end before minSteps");
 			return false;
 		}
 
@@ -61,19 +63,23 @@ public partial class RandomWalk
 			nextRoom.Neighbors.Add(currentRoom);
 
 			// Add the hallway to the current room based on direction. Horizontal case first.
+			int cellSize = ROOM_SIZE + HALLWAY_WIDTH;
+			int pixelX = currentRoom.Position.X * cellSize;
+			int pixelY = currentRoom.Position.Y * cellSize;
+
 			if (direction.X != 0)
 			{
 				currentRoom.Hallways.Add(new Rect2I(
-					new Vector2I(currentRoom.Position.X + ROOM_SIZE, currentRoom.Position.Y + ROOM_SIZE / 2 - HALLWAY_WIDTH / 2),
-					new Vector2I(ROOM_SIZE, HALLWAY_WIDTH)));
+					new Vector2I(pixelX + ROOM_SIZE, pixelY + ROOM_SIZE / 2 - HALLWAY_WIDTH / 2),
+					new Vector2I(HALLWAY_WIDTH, HALLWAY_WIDTH)));
 			}
 
 			// Vertical case.
 			else if (direction.Y != 0)
 			{
 				currentRoom.Hallways.Add(new Rect2I(
-					new Vector2I(currentRoom.Position.X + ROOM_SIZE / 2 - HALLWAY_WIDTH / 2, currentRoom.Position.Y + ROOM_SIZE),
-					new Vector2I(HALLWAY_WIDTH, ROOM_SIZE)));
+					new Vector2I(pixelX + ROOM_SIZE / 2 - HALLWAY_WIDTH / 2, pixelY + ROOM_SIZE),
+					new Vector2I(HALLWAY_WIDTH, HALLWAY_WIDTH)));
 			}
 		}
 		
@@ -82,31 +88,33 @@ public partial class RandomWalk
 		{
 			currentRoom.Neighbors.Add(nextRoom);
 			nextRoom.Neighbors.Add(currentRoom);
-			return true;
+			return true; // Don't recurse into existing rooms!
 		}
 
-		// Recursion and branch case.
-		bool success = Walk(nextRoom, stepCount + 1);
+		// Recursion — only reached when nextRoom was newly created.
+		bool success = Walk(nextRoom, stepCount + 1, currentRoom, isBranch);
 		if (!success)
 		{
+			GD.Print($"Backtracking from step {stepCount}");
 			// Undo: remove nextRoom, remove neighbors, remove hallway.
 			_rooms.Remove(nextRoom);
 			currentRoom.Neighbors.Remove(nextRoom);
 			nextRoom.Neighbors.Remove(currentRoom);
-			currentRoom.Hallways.RemoveAt(currentRoom.Hallways.Count - 1);
+			if (currentRoom.Hallways.Count > 0)
+				currentRoom.Hallways.RemoveAt(currentRoom.Hallways.Count - 1);
 			return false; // Propagate failure up.
 		}
 
-		if (_allowBranches && _random.NextDouble() < _branchChance)
+		if (_allowBranches && _random.NextDouble() > _branchChance)
 		{
-			Walk(currentRoom, stepCount, true);
+			Walk(currentRoom, stepCount + 1, null, true);
 		}
 
 		return true;
 	}
 
 	// Helper function.
-	private List<Vector2I> GetValidDirections(RWRoom currentRoom, bool isBranch)
+	private List<Vector2I> GetValidDirections(RWRoom currentRoom, RWRoom cameFrom, bool isBranch)
 	{
 		List<Vector2I> validDirections = new List<Vector2I>();
 		Vector2I[] directions =
@@ -120,9 +128,10 @@ public partial class RandomWalk
 		{
 			Vector2I neighborPosition = currentRoom.Position + direction;
 			bool roomExists = _rooms.Any(r => r.Position == neighborPosition);
+			bool isBacktrack = cameFrom != null && neighborPosition == cameFrom.Position;
 
 			bool canConnect = _allowLoops || (isBranch && _allowBranchesToConnect);
-			if (!roomExists || canConnect)
+			if (!isBacktrack && (!roomExists || canConnect))
 			{
 				validDirections.Add(direction);
 			}
@@ -150,5 +159,6 @@ public partial class RandomWalk
 		RWRoom startRoom = new RWRoom(new Vector2I(0, 0));
 		_rooms.Add(startRoom);
 		Walk(startRoom, 0);
+		GD.Print($"Rooms generated: {_rooms.Count}");
 	}
 }

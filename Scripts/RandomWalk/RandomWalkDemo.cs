@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class RandomWalkDemo : Node2D
@@ -115,7 +116,8 @@ public partial class RandomWalkDemo : Node2D
     private void GenerateWorld()
     {
         _randomWalk = new RandomWalk();
-        _randomWalk.Generate(_minSteps, _maxSteps, _seed, _stepChance, _branchChance, _allowLoops, _allowBranches, _allowBranchesToConnect);
+        int seed = _seed == 0 ? new Random().Next() : _seed;
+        _randomWalk.Generate(_minSteps, _maxSteps, seed, _stepChance, _branchChance, _allowLoops, _allowBranches, _allowBranchesToConnect);
         _randomWalkWorldRenderer.Initialize(_randomWalk);
     }
 }

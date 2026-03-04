@@ -62,52 +62,66 @@ public partial class RandomWalk
 			currentRoom.Neighbors.Add(nextRoom);
 			nextRoom.Neighbors.Add(currentRoom);
 
-			// Add the hallway to the current room based on direction. Horizontal case first.
+			// Add hallway immediately — we'll remove it if we backtrack.
 			int cellSize = ROOM_SIZE + HALLWAY_WIDTH;
 			int pixelX = currentRoom.Position.X * cellSize;
 			int pixelY = currentRoom.Position.Y * cellSize;
+			Rect2I hallway;
 
 			if (direction.X != 0)
 			{
-				currentRoom.Hallways.Add(new Rect2I(
-					new Vector2I(pixelX + ROOM_SIZE, pixelY + ROOM_SIZE / 2 - HALLWAY_WIDTH / 2),
-					new Vector2I(HALLWAY_WIDTH, HALLWAY_WIDTH)));
+				// If going right, hallway starts at right edge of room.
+				// If going left, hallway starts at left edge of nextRoom (which is left edge of current room - hallway width).
+				int hallwayX = direction.X > 0 
+					? pixelX + ROOM_SIZE 
+					: pixelX - (cellSize - ROOM_SIZE);
+				hallway = new Rect2I(
+					new Vector2I(hallwayX, pixelY + ROOM_SIZE / 2 - HALLWAY_WIDTH / 2),
+					new Vector2I(cellSize - ROOM_SIZE, HALLWAY_WIDTH));
 			}
-
-			// Vertical case.
-			else if (direction.Y != 0)
+			else
 			{
-				currentRoom.Hallways.Add(new Rect2I(
-					new Vector2I(pixelX + ROOM_SIZE / 2 - HALLWAY_WIDTH / 2, pixelY + ROOM_SIZE),
-					new Vector2I(HALLWAY_WIDTH, HALLWAY_WIDTH)));
+				// If going down, hallway starts at bottom edge of room.
+				// If going up, hallway starts at top edge of nextRoom.
+				int hallwayY = direction.Y > 0 
+					? pixelY + ROOM_SIZE 
+					: pixelY - (cellSize - ROOM_SIZE);
+				hallway = new Rect2I(
+					new Vector2I(pixelX + ROOM_SIZE / 2 - HALLWAY_WIDTH / 2, hallwayY),
+					new Vector2I(HALLWAY_WIDTH, cellSize - ROOM_SIZE));
+			}
+			currentRoom.Hallways.Add(hallway);
+			nextRoom.Hallways.Add(hallway); // mirror hallway on nextRoom too
+
+			bool success = Walk(nextRoom, stepCount + 1, currentRoom, isBranch);
+			if (!success)
+			{
+				GD.Print($"Backtracking from step {stepCount}");
+				_rooms.Remove(nextRoom);
+				currentRoom.Neighbors.Remove(nextRoom);
+				nextRoom.Neighbors.Remove(currentRoom);
+				currentRoom.Hallways.Remove(hallway);
+				nextRoom.Hallways.Remove(hallway);
+				return false;
+			}
+
+			// Branch only after walk fully succeeds.
+			if (_allowBranches && _random.NextDouble() > _branchChance)
+			{
+				int hallwayCountBefore = currentRoom.Hallways.Count;
+				Walk(currentRoom, stepCount + 1, nextRoom, true);
+				while (currentRoom.Hallways.Count > hallwayCountBefore)
+					currentRoom.Hallways.RemoveAt(currentRoom.Hallways.Count - 1);
 			}
 		}
-		
-		// If next room is not null, then connect next room and current room as neighbors.
-		else if (_allowLoops)
+		else if (_allowLoops || (isBranch && _allowBranchesToConnect))
 		{
-			currentRoom.Neighbors.Add(nextRoom);
-			nextRoom.Neighbors.Add(currentRoom);
-			return true; // Don't recurse into existing rooms!
-		}
-
-		// Recursion — only reached when nextRoom was newly created.
-		bool success = Walk(nextRoom, stepCount + 1, currentRoom, isBranch);
-		if (!success)
-		{
-			GD.Print($"Backtracking from step {stepCount}");
-			// Undo: remove nextRoom, remove neighbors, remove hallway.
-			_rooms.Remove(nextRoom);
-			currentRoom.Neighbors.Remove(nextRoom);
-			nextRoom.Neighbors.Remove(currentRoom);
-			if (currentRoom.Hallways.Count > 0)
-				currentRoom.Hallways.RemoveAt(currentRoom.Hallways.Count - 1);
-			return false; // Propagate failure up.
-		}
-
-		if (_allowBranches && _random.NextDouble() > _branchChance)
-		{
-			Walk(currentRoom, stepCount + 1, null, true);
+			if (!currentRoom.Neighbors.Contains(nextRoom))
+			{
+				currentRoom.Neighbors.Add(nextRoom);
+				nextRoom.Neighbors.Add(currentRoom);
+			}
+			return true;
 		}
 
 		return true;
@@ -154,7 +168,7 @@ public partial class RandomWalk
 		// Initialize seed and rooms.
 		_random = new Random(_seed);
 		_rooms = new List<RWRoom>();
-		
+
 		// create start room and call Walk algorithm.
 		RWRoom startRoom = new RWRoom(new Vector2I(0, 0));
 		_rooms.Add(startRoom);

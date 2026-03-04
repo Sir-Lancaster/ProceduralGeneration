@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgurdy58xwl60"]
+
+[ext_resource type="Script" uid="uid://bmehf26wy6ygh" path="res://Scripts/RandomWalk/RandomWalkDemo.cs" id="1_bpeup"]
+[ext_resource type="PackedScene" uid="uid://djvvjw0cvtiuy" path="res://Scenes/RandomWalk/RandomWalkUI.tscn" id="1_igfgw"]
+[ext_resource type="Script" uid="uid://n5sxst2ivvsn" path="res://Scripts/RandomWalk/RandomWalkWorldRenderer.cs" id="2_b3g70"]
+[ext_resource type="Script" uid="uid://cl8fij0dxvj0j" path="res://Scripts/CameraController.cs" id="3_b3g70"]
+
+[node name="RandomWalkDemo" type="Node2D"]
+script = ExtResource("1_bpeup")
+
+[node name="RandomWalkWorldRenderer" type="Node2D" parent="."]
+script = ExtResource("2_b3g70")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_b3g70")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UIPanel" parent="CanvasLayer" instance=ExtResource("1_igfgw")]

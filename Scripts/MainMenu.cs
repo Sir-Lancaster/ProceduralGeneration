@@ -21,4 +21,9 @@ public partial class MainMenu : Control
 	{
 		GetTree().Root.GetNode<SceneManager>("SceneManager").GoToBSPDemo();
 	}
+
+	private void _on_random_walk_nav_pressed()
+	{
+		GetTree().Root.GetNode<SceneManager>("SceneManager").GoToRandomWalkDemo();
+	}
 }

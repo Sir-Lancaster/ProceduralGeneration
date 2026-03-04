@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class BSPDemo : Node2D
@@ -52,7 +53,8 @@ public partial class BSPDemo : Node2D
     private void GenerateWorld()
     {
         _bsp = new BinarySpace();
-        _bsp.Generate(_maxDepth, _minDepth, _width, _height, _seed, _splitChance);
+        int seed = _seed == 0 ? new Random().Next() : _seed;
+        _bsp.Generate(_maxDepth, _minDepth, _width, _height, seed, _splitChance);
         _bspWorldRenderer.Initialize(_bsp, 1);
     }
 

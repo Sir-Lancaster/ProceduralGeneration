@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bt56iibkeye75"]
 
-[ext_resource type="Script" uid="uid://dkdfkf8dgc7e4" path="res://Scripts/CellularAutomataDemo.cs" id="1_rs2we"]
-[ext_resource type="Script" uid="uid://caonwvkhqkwf0" path="res://Scripts/AutomataWorldRenderer.cs" id="2_fl6lm"]
+[ext_resource type="Script" uid="uid://dkdfkf8dgc7e4" path="res://Scripts/CellularAutomata/CellularAutomataDemo.cs" id="1_rs2we"]
+[ext_resource type="Script" uid="uid://caonwvkhqkwf0" path="res://Scripts/CellularAutomata/AutomataWorldRenderer.cs" id="2_fl6lm"]
 [ext_resource type="Script" uid="uid://cl8fij0dxvj0j" path="res://Scripts/CameraController.cs" id="3_02t0i"]
-[ext_resource type="PackedScene" uid="uid://d0tpsr2kps2n6" path="res://Scenes/CellularAutomataUI.tscn" id="4_fl6lm"]
+[ext_resource type="PackedScene" uid="uid://d0tpsr2kps2n6" path="res://Scenes/CellularAutomata/CellularAutomataUI.tscn" id="4_fl6lm"]
 
 [node name="CellularAutomataDemo" type="Node2D"]
 script = ExtResource("1_rs2we")

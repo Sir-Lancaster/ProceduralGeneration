@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnj0ex1q8lad8"]
+
+[ext_resource type="Script" uid="uid://bmq2t0fpy8mk4" path="res://Scripts/BinarySpacePartitioning/BSPDemo.cs" id="1_r8nh2"]
+[ext_resource type="Script" uid="uid://7vuuwmcfjuwt" path="res://Scripts/BinarySpacePartitioning/BSPWorldRenderer.cs" id="2_rc0d0"]
+[ext_resource type="Script" uid="uid://cl8fij0dxvj0j" path="res://Scripts/CameraController.cs" id="3_0ejvf"]
+[ext_resource type="PackedScene" uid="uid://d2xbxqhsp5ibr" path="res://Scenes/BinarySpacePartitioning/BSPUI.tscn" id="4_5whjp"]
+
+[node name="BinaryDemo" type="Node2D"]
+script = ExtResource("1_r8nh2")
+
+[node name="BSPWorldRenderer" type="Node2D" parent="."]
+script = ExtResource("2_rc0d0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_0ejvf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UIPanel" parent="CanvasLayer" instance=ExtResource("4_5whjp")]

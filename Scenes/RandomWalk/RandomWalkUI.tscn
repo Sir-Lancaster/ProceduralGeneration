@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://djvvjw0cvtiuy"]
+
+[node name="RandomWalkUi" type="VBoxContainer"]
+offset_right = 329.0
+offset_bottom = 400.0
+
+[node name="MinStepsLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Min Steps"
+horizontal_alignment = 1
+
+[node name="MinStepsSlider" type="HSlider" parent="."]
+layout_mode = 2
+value = 10.0
+
+[node name="MaxStepsLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Max Steps"
+horizontal_alignment = 1
+
+[node name="MaxStepsSlider" type="HSlider" parent="."]
+layout_mode = 2
+value = 30.0
+
+[node name="StepChanceLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Step Chance"
+horizontal_alignment = 1
+
+[node name="StepChanceSlider" type="HSlider" parent="."]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="LoopsGrouping" type="HSplitContainer" parent="."]
+layout_mode = 2
+
+[node name="AllowLoopsLabel" type="Label" parent="LoopsGrouping"]
+layout_mode = 2
+text = "Allow Loops"
+horizontal_alignment = 1
+
+[node name="LoopsCheckButton" type="CheckButton" parent="LoopsGrouping"]
+layout_mode = 2
+button_pressed = true
+
+[node name="BranchEnableGroup" type="HSplitContainer" parent="."]
+layout_mode = 2
+
+[node name="BranchesLabel" type="Label" parent="BranchEnableGroup"]
+layout_mode = 2
+text = "Branches"
+horizontal_alignment = 1
+
+[node name="BranchCheckButton" type="CheckButton" parent="BranchEnableGroup"]
+layout_mode = 2
+button_pressed = true
+
+[node name="BranchConnectGroup" type="HSplitContainer" parent="."]
+layout_mode = 2
+
+[node name="BranchConnectLabel" type="Label" parent="BranchConnectGroup"]
+layout_mode = 2
+text = "Allow Branches To Connect"
+
+[node name="BranchConnectCheckButton" type="CheckButton" parent="BranchConnectGroup"]
+layout_mode = 2
+
+[node name="BranchChanceLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Branch Chance"
+horizontal_alignment = 1
+
+[node name="BranchChanceSlider" type="HSlider" parent="."]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.3
+
+[node name="SeedLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Seed (0 for random)"
+
+[node name="SeedLineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+placeholder_text = "0"
+
+[node name="GenerateButton" type="Button" parent="."]
+layout_mode = 2
+text = "Generate"
+
+[node name="BackToMenuButton" type="Button" parent="."]
+layout_mode = 2
+text = "Back To Menu"
